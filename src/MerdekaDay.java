@@ -3,7 +3,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
-import javax.imageio.ImageIO;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
  
 public class MerdekaDay extends JFrame implements ActionListener
 {
@@ -11,6 +14,7 @@ public class MerdekaDay extends JFrame implements ActionListener
    private JButton fireworkButton;
    private JButton presentButton;
    private JButton ornamentButton;
+   private JButton musicButton;
    private JButton addAllButton;
    private JButton exitButton;
  
@@ -31,6 +35,7 @@ public class MerdekaDay extends JFrame implements ActionListener
    private boolean presents = false;
    private boolean ornaments = false;
    private boolean fireworks = false;
+   private boolean music = false;
  
    public MerdekaDay()
    {
@@ -95,6 +100,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       fireworkButton = new JButton("Fireworks");
       presentButton = new JButton("Presents");
       ornamentButton = new JButton("Ornaments");
+      musicButton = new JButton("Play Music");
       addAllButton = new JButton("Add All");
       exitButton = new JButton("Exit");
  
@@ -102,6 +108,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       fireworkButton.setBackground(Color.red);
       ornamentButton.setBackground(Color.red);
       presentButton.setBackground(Color.red);
+      musicButton.setBackground(Color.red);
       addAllButton.setBackground(Color.red);
       exitButton.setBackground(Color.red);
  
@@ -109,20 +116,23 @@ public class MerdekaDay extends JFrame implements ActionListener
       fireworkButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       ornamentButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
       presentButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
+      musicButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       addAllButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
       exitButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
  
       //Setting font colour on buttons
-      fireworkButton.setForeground(Color.red);
-      ornamentButton.setForeground(Color.red);
-      presentButton.setForeground(Color.red);
-      addAllButton.setForeground(Color.red);
-      exitButton.setForeground(Color.red);
+      fireworkButton.setForeground(Color.white);
+      ornamentButton.setForeground(Color.white);
+      presentButton.setForeground(Color.white);
+      musicButton.setForeground(Color.white);
+      addAllButton.setForeground(Color.white);
+      exitButton.setForeground(Color.white);
  
       //Add the buttons to the buttonPanel
       buttonPanel.add(fireworkButton);
       buttonPanel.add(ornamentButton);
       buttonPanel.add(presentButton);
+      buttonPanel.add(musicButton);
       buttonPanel.add(addAllButton);
       buttonPanel.add(exitButton);
  
@@ -130,6 +140,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       fireworkButton.addActionListener(this);
       ornamentButton.addActionListener(this);
       presentButton.addActionListener(this);
+      musicButton.addActionListener(this);
       addAllButton.addActionListener(this);
       exitButton.addActionListener(this);
  
@@ -142,12 +153,13 @@ public class MerdekaDay extends JFrame implements ActionListener
       //Configure the frame
       getContentPane().setBackground(Color.white);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setSize(500, 650);
+      setSize(1000, 650);
       setLocation(300,40);
       setVisible(true);
  
    }//Constructor
  
+   @Override
    public void paint(Graphics g)
    {
       //Call the paint method of the superclass
@@ -235,6 +247,24 @@ public class MerdekaDay extends JFrame implements ActionListener
       }//if presents
  
    } //paint
+   
+    public void playSound(String soundName)
+    {
+        if(music){
+        try 
+        {
+         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile( ));
+         Clip clip = AudioSystem.getClip( );
+         clip.open(audioInputStream);
+         clip.start( );
+        }
+        catch(Exception ex)
+        {
+          System.out.println("Error with playing sound.");
+          ex.printStackTrace( );
+        }
+        }
+    }
  
    //Coding the event-handling routine
    public void actionPerformed(ActionEvent event)
@@ -244,6 +274,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       {
          ornaments = false;
          presents = false;
+         music = false;
          fireworks = true;
          repaint();
  
@@ -253,6 +284,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       {
          fireworks = false;
          presents = false;
+         music = false;
          ornaments = true;
          repaint();
  
@@ -262,17 +294,30 @@ public class MerdekaDay extends JFrame implements ActionListener
       {
          fireworks = false;
          ornaments = false;
+         music = false;
          presents = true;
          repaint();
  
       }//if present
+      
+      else if(event.getSource() == musicButton)
+      {
+          fireworks = false;
+          ornaments = false;
+          music = true;
+          presents = false;
+          repaint();
+          playSound("lagu.wav");
+      }
  
       else if(event.getSource()==addAllButton)
       {
          fireworks = true;
          ornaments = true;
+         music = true;
          presents = true;
          repaint();
+         playSound("lagu.wav");
       }//if add all
  
       else
