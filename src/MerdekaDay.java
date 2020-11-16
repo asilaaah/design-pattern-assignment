@@ -12,8 +12,8 @@ public class MerdekaDay extends JFrame implements ActionListener
 {
    //Buttons
    private JButton fireworkButton;
-   private JButton presentButton;
-   private JButton ornamentButton;
+   private JButton trishawButton;
+   private JButton busButton;
    private JButton musicButton;
    private JButton addAllButton;
    private JButton exitButton;
@@ -28,12 +28,12 @@ public class MerdekaDay extends JFrame implements ActionListener
    private ImageIcon image;
  
    //Boolean
-//   private boolean presents = true;
-//   private boolean ornaments = true;
+//   private boolean trishaw = true;
+//   private boolean bus = true;
 //   private boolean fireworks = true;
    
-   private boolean presents = false;
-   private boolean ornaments = false;
+   private boolean trishaw = false;
+   private boolean bus = false;
    private boolean fireworks = false;
    private boolean music = false;
  
@@ -98,48 +98,48 @@ public class MerdekaDay extends JFrame implements ActionListener
  
       //Naming buttons
       fireworkButton = new JButton("Fireworks");
-      presentButton = new JButton("Presents");
-      ornamentButton = new JButton("Ornaments");
+      trishawButton = new JButton("Trishaw");
+      busButton = new JButton("Bus");
       musicButton = new JButton("Play Music");
       addAllButton = new JButton("Add All");
       exitButton = new JButton("Exit");
  
       //Setting colour of buttons
       fireworkButton.setBackground(Color.red);
-      ornamentButton.setBackground(Color.red);
-      presentButton.setBackground(Color.red);
+      busButton.setBackground(Color.red);
+      trishawButton.setBackground(Color.red);
       musicButton.setBackground(Color.red);
       addAllButton.setBackground(Color.red);
       exitButton.setBackground(Color.red);
  
       //Setting font on buttons
       fireworkButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
-      ornamentButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
-      presentButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
+      busButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
+      trishawButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       musicButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       addAllButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
       exitButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
  
       //Setting font colour on buttons
       fireworkButton.setForeground(Color.white);
-      ornamentButton.setForeground(Color.white);
-      presentButton.setForeground(Color.white);
+      busButton.setForeground(Color.white);
+      trishawButton.setForeground(Color.white);
       musicButton.setForeground(Color.white);
       addAllButton.setForeground(Color.white);
       exitButton.setForeground(Color.white);
  
       //Add the buttons to the buttonPanel
       buttonPanel.add(fireworkButton);
-      buttonPanel.add(ornamentButton);
-      buttonPanel.add(presentButton);
+      buttonPanel.add(busButton);
+      buttonPanel.add(trishawButton);
       buttonPanel.add(musicButton);
       buttonPanel.add(addAllButton);
       buttonPanel.add(exitButton);
  
       //Enable buttons to listen for a mouse-click
       fireworkButton.addActionListener(this);
-      ornamentButton.addActionListener(this);
-      presentButton.addActionListener(this);
+      busButton.addActionListener(this);
+      trishawButton.addActionListener(this);
       musicButton.addActionListener(this);
       addAllButton.addActionListener(this);
       exitButton.addActionListener(this);
@@ -215,36 +215,35 @@ public class MerdekaDay extends JFrame implements ActionListener
  
       }//if fireworks
  
-      if(ornaments)
+      if(bus)
       {
-         //draw ornaments
-         g.setColor(Color.red);
-         g.fillOval(220,220,15,15);
-         g.fillOval(280,220,15,15);
-         g.setColor(Color.blue);
-         g.fillOval(320,380,15,15);
-         g.fillOval(180,380,15,15);
-         g.setColor(Color.cyan);
-         g.fillOval(200,300,15,15);
-         g.fillOval(300,300,15,15);
+         //draw bus
+        g.setColor(Color.RED);
+        g.fillRect(60, 530, 100, 10);
+        g.fillRect(60, 550, 100, 10);
+        g.fillRect(60, 570, 100, 10);
+        
+        g.setColor(Color.WHITE);
+        g.fillRect(60, 540, 100, 10);
+        g.fillRect(60, 560, 100, 10);
+       
+        g.setColor(Color.YELLOW);
+        g.fillOval(70, 570, 20, 20);
+        g.fillOval(130, 570, 20, 20);
+        
+        g.setColor(Color.BLUE);
+        g.fillRect(130, 530, 30, 23);
  
-      }//if ornaments
+      }//if bus
  
-      if(presents)
+      if(trishaw)
       {
-         //draw presents
-         g.setColor(Color.red);
-         g.fillRect(320,400,60,60);
-         g.fillRect(140,380,30,30);
- 
-         g.setColor(Color.orange);
-         g.fillRect(180,430,40,40);
- 
-         g.setColor(Color.blue);
-         g.fillRect(120,400,60,60);
-         g.fillRect(360,440,30,30);
- 
-      }//if presents
+        //add trishaw
+        Toolkit t=Toolkit.getDefaultToolkit();  
+        Image i=t.getImage("trishaw.png");  
+        g.drawImage(i,610,520,this);  
+
+      }//if trishaw
  
    } //paint
    
@@ -272,50 +271,50 @@ public class MerdekaDay extends JFrame implements ActionListener
  
       if(event.getSource()==fireworkButton)
       {
-         ornaments = false;
-         presents = false;
+         bus = false;
+         trishaw = false;
          music = false;
          fireworks = true;
          repaint();
  
       }//if firework
  
-      else if(event.getSource()==ornamentButton)
+      else if(event.getSource()==busButton)
       {
          fireworks = false;
-         presents = false;
+         trishaw = false;
          music = false;
-         ornaments = true;
+         bus = true;
          repaint();
  
-      }//if ornament
+      }//if bus
  
-      else if(event.getSource()==presentButton)
+      else if(event.getSource()==trishawButton)
       {
          fireworks = false;
-         ornaments = false;
+         bus = false;
          music = false;
-         presents = true;
+         trishaw = true;
          repaint();
  
-      }//if present
+      }//if trishaw
       
       else if(event.getSource() == musicButton)
       {
           fireworks = false;
-          ornaments = false;
+          bus = false;
           music = true;
-          presents = false;
+          trishaw = false;
           repaint();
           playSound("lagu.wav");
-      }
+      }//if music
  
       else if(event.getSource()==addAllButton)
       {
          fireworks = true;
-         ornaments = true;
+         bus = true;
          music = true;
-         presents = true;
+         trishaw = true;
          repaint();
          playSound("lagu.wav");
       }//if add all
@@ -331,7 +330,7 @@ public class MerdekaDay extends JFrame implements ActionListener
    public static void main(String[] args)
    {
       MerdekaDay gui = new MerdekaDay();
- 
+      
    }//main
  
 }//class
