@@ -17,6 +17,8 @@ public class MerdekaDay extends JFrame implements ActionListener
    private JButton musicButton;
    private JButton addAllButton;
    private JButton exitButton;
+   private JButton hibiscusButton;
+   private JButton lightsButton;
  
    //Panels
    private JPanel titlePanel, imagePanel, buttonPanel, infoPanel;
@@ -31,11 +33,15 @@ public class MerdekaDay extends JFrame implements ActionListener
 //   private boolean trishaw = true;
 //   private boolean bus = true;
 //   private boolean fireworks = true;
+//   private boolean hibiscus = true;
+//   private boolean lights= true;
    
    private boolean trishaw = false;
    private boolean bus = false;
    private boolean fireworks = false;
    private boolean music = false;
+   private boolean hibiscus = false;
+   private boolean lights = false;
  
    public MerdekaDay()
    {
@@ -96,50 +102,62 @@ public class MerdekaDay extends JFrame implements ActionListener
       infoPanel.add(buttonLabel);
       infoPanel.setBackground(Color.white);
  
-      //Naming buttons
+     //Naming buttons
       fireworkButton = new JButton("Fireworks");
+      lightsButton = new JButton("Lights");
       trishawButton = new JButton("Trishaw");
       busButton = new JButton("Bus");
+      hibiscusButton = new JButton("Hibiscus");
       musicButton = new JButton("Play Music");
       addAllButton = new JButton("Add All");
       exitButton = new JButton("Exit");
  
-      //Setting colour of buttons
+     //Setting colour of buttons
       fireworkButton.setBackground(Color.red);
+      lightsButton.setBackground(Color.red);
       busButton.setBackground(Color.red);
       trishawButton.setBackground(Color.red);
+      hibiscusButton.setBackground(Color.red);
       musicButton.setBackground(Color.red);
       addAllButton.setBackground(Color.red);
       exitButton.setBackground(Color.red);
  
       //Setting font on buttons
       fireworkButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
+      lightsButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       busButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
       trishawButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
+      hibiscusButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       musicButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       addAllButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
       exitButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
  
       //Setting font colour on buttons
       fireworkButton.setForeground(Color.white);
+      lightsButton.setForeground(Color.white);
       busButton.setForeground(Color.white);
       trishawButton.setForeground(Color.white);
+      hibiscusButton.setForeground(Color.white);
       musicButton.setForeground(Color.white);
       addAllButton.setForeground(Color.white);
       exitButton.setForeground(Color.white);
  
       //Add the buttons to the buttonPanel
       buttonPanel.add(fireworkButton);
+      buttonPanel.add(lightsButton);
       buttonPanel.add(busButton);
       buttonPanel.add(trishawButton);
+      buttonPanel.add(hibiscusButton);
       buttonPanel.add(musicButton);
       buttonPanel.add(addAllButton);
       buttonPanel.add(exitButton);
  
       //Enable buttons to listen for a mouse-click
       fireworkButton.addActionListener(this);
+      lightsButton.addActionListener(this);
       busButton.addActionListener(this);
       trishawButton.addActionListener(this);
+      hibiscusButton.addActionListener(this);
       musicButton.addActionListener(this);
       addAllButton.addActionListener(this);
       exitButton.addActionListener(this);
@@ -215,6 +233,28 @@ public class MerdekaDay extends JFrame implements ActionListener
  
       }//if fireworks
  
+       if(lights)
+      {
+         //draw lights
+         g.setColor(Color.orange);
+         g.fillOval(330,445,15,15);
+         g.fillOval(350,440,15,15);
+         
+         g.fillOval(480,405,15,15);
+         g.fillOval(500,400,15,15);
+         g.fillOval(520,395,15,15);
+         g.fillOval(540,390,15,15);
+         g.fillOval(560,385,15,15);
+         g.fillOval(580,380,15,15);
+         
+         g.fillOval(620,295,15,15);
+         g.fillOval(640,290,15,15);
+         g.fillOval(660,285,15,15);
+    
+         
+ 
+      }//if lights 
+       
       if(bus)
       {
          //draw bus
@@ -244,6 +284,15 @@ public class MerdekaDay extends JFrame implements ActionListener
         g.drawImage(i,610,520,this);  
 
       }//if trishaw
+      
+       if(hibiscus)
+      {
+        //add hibiscus
+        Toolkit t=Toolkit.getDefaultToolkit();  
+        Image i=t.getImage("hibiscus.png");  
+        g.drawImage(i,700,60,this);  
+
+      }//if hibiscus
  
    } //paint
    
@@ -275,6 +324,8 @@ public class MerdekaDay extends JFrame implements ActionListener
          trishaw = false;
          music = false;
          fireworks = true;
+         hibiscus = false;
+         lights= false;
          repaint();
  
       }//if firework
@@ -285,6 +336,8 @@ public class MerdekaDay extends JFrame implements ActionListener
          trishaw = false;
          music = false;
          bus = true;
+         hibiscus = false;
+         lights = false;
          repaint();
  
       }//if bus
@@ -295,9 +348,23 @@ public class MerdekaDay extends JFrame implements ActionListener
          bus = false;
          music = false;
          trishaw = true;
+         hibiscus= false;
+         lights = false;
          repaint();
  
       }//if trishaw
+      
+      else if(event.getSource()==hibiscusButton)
+      {
+         fireworks = false;
+         bus = false;
+         music = false;
+         trishaw = false;
+         hibiscus= true;
+         lights= false;
+         repaint();
+ 
+      }//if hibiscus
       
       else if(event.getSource() == musicButton)
       {
@@ -305,16 +372,31 @@ public class MerdekaDay extends JFrame implements ActionListener
           bus = false;
           music = true;
           trishaw = false;
+          hibiscus = false;
+          lights= false;
           repaint();
           playSound("lagu.wav");
       }//if music
  
+      else if(event.getSource()==lightsButton)
+      {
+         fireworks = false;
+         bus = false;
+         music = false;
+         trishaw = false;
+         hibiscus= false;
+         lights= true;
+         repaint();
+ 
+      }//if hibiscus
       else if(event.getSource()==addAllButton)
       {
          fireworks = true;
          bus = true;
          music = true;
          trishaw = true;
+         hibiscus = true;
+         lights = true;
          repaint();
          playSound("lagu.wav");
       }//if add all
