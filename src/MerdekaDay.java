@@ -12,6 +12,7 @@ public class MerdekaDay extends JFrame implements ActionListener
 {
    //Buttons
    private JButton fireworkButton;
+   private JButton klccButton;
    private JButton trishawButton;
    private JButton busButton;
    private JButton musicButton;
@@ -36,6 +37,7 @@ public class MerdekaDay extends JFrame implements ActionListener
 //   private boolean hibiscus = true;
 //   private boolean lights= true;
    
+   private boolean klcc = false;
    private boolean trishaw = false;
    private boolean bus = false;
    private boolean fireworks = false;
@@ -105,6 +107,7 @@ public class MerdekaDay extends JFrame implements ActionListener
      //Naming buttons
       fireworkButton = new JButton("Fireworks");
       lightsButton = new JButton("Lights");
+      klccButton = new JButton("KLCC");
       trishawButton = new JButton("Trishaw");
       busButton = new JButton("Bus");
       hibiscusButton = new JButton("Hibiscus");
@@ -115,6 +118,7 @@ public class MerdekaDay extends JFrame implements ActionListener
      //Setting colour of buttons
       fireworkButton.setBackground(Color.red);
       lightsButton.setBackground(Color.red);
+      klccButton.setBackground(Color.red);
       busButton.setBackground(Color.red);
       trishawButton.setBackground(Color.red);
       hibiscusButton.setBackground(Color.red);
@@ -125,6 +129,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       //Setting font on buttons
       fireworkButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       lightsButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
+      klccButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       busButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC,16));
       trishawButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
       hibiscusButton.setFont(new Font("CENTURY GOTHIC", Font.ITALIC, 16));
@@ -135,6 +140,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       //Setting font colour on buttons
       fireworkButton.setForeground(Color.white);
       lightsButton.setForeground(Color.white);
+      klccButton.setForeground(Color.white);
       busButton.setForeground(Color.white);
       trishawButton.setForeground(Color.white);
       hibiscusButton.setForeground(Color.white);
@@ -145,6 +151,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       //Add the buttons to the buttonPanel
       buttonPanel.add(fireworkButton);
       buttonPanel.add(lightsButton);
+      buttonPanel.add(klccButton);
       buttonPanel.add(busButton);
       buttonPanel.add(trishawButton);
       buttonPanel.add(hibiscusButton);
@@ -155,6 +162,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       //Enable buttons to listen for a mouse-click
       fireworkButton.addActionListener(this);
       lightsButton.addActionListener(this);
+      klccButton.addActionListener(this);
       busButton.addActionListener(this);
       trishawButton.addActionListener(this);
       hibiscusButton.addActionListener(this);
@@ -232,6 +240,29 @@ public class MerdekaDay extends JFrame implements ActionListener
         }
  
       }//if fireworks
+      
+      if(klcc){
+        Color LIGHT_GRAY = new Color(204,204,204);
+        Color WHITE = new Color(255,255,255);
+        
+        g.setColor(LIGHT_GRAY);
+        g.fillRect(46, 381, 100, 200);
+        g.fillRect(60, 301, 70, 200);
+        g.fillRect(76, 241, 40, 200);
+        g.fillRect(95, 161, 3, 100);
+        g.fillOval(86, 151, 20, 20);
+
+        g.fillRect(220, 381, 100, 200);
+        g.fillRect(235, 301, 70, 200);
+        g.fillRect(250, 241, 40, 200);
+        g.fillRect(270, 161, 3, 100);
+        g.fillOval(261, 151, 20, 20);
+        
+        g.fillRect(145, 430, 77, 30);
+        g.setColor(WHITE);
+        g.fillRect(145, 430, 77, 5);
+        g.fillRect(145, 455, 77, 5);
+      }//if klcc
  
        if(lights)
       {
@@ -320,6 +351,7 @@ public class MerdekaDay extends JFrame implements ActionListener
  
       if(event.getSource()==fireworkButton)
       {
+         klcc = false;
          bus = false;
          trishaw = false;
          music = false;
@@ -332,6 +364,7 @@ public class MerdekaDay extends JFrame implements ActionListener
  
       else if(event.getSource()==busButton)
       {
+         klcc = false;
          fireworks = false;
          trishaw = false;
          music = false;
@@ -344,6 +377,7 @@ public class MerdekaDay extends JFrame implements ActionListener
  
       else if(event.getSource()==trishawButton)
       {
+         klcc = false;
          fireworks = false;
          bus = false;
          music = false;
@@ -356,6 +390,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       
       else if(event.getSource()==hibiscusButton)
       {
+         klcc = false;
          fireworks = false;
          bus = false;
          music = false;
@@ -368,6 +403,7 @@ public class MerdekaDay extends JFrame implements ActionListener
       
       else if(event.getSource() == musicButton)
       {
+          klcc = false;
           fireworks = false;
           bus = false;
           music = true;
@@ -380,6 +416,7 @@ public class MerdekaDay extends JFrame implements ActionListener
  
       else if(event.getSource()==lightsButton)
       {
+         klcc = false;
          fireworks = false;
          bus = false;
          music = false;
@@ -388,9 +425,24 @@ public class MerdekaDay extends JFrame implements ActionListener
          lights= true;
          repaint();
  
+      }//if lights
+      
+      else if(event.getSource()==klccButton)
+      {
+         klcc = true;
+         fireworks = false;
+         bus = false;
+         music = false;
+         trishaw = false;
+         hibiscus= false;
+         lights= false;
+         repaint();
+ 
       }//if hibiscus
+      
       else if(event.getSource()==addAllButton)
       {
+         klcc = true;
          fireworks = true;
          bus = true;
          music = true;
